@@ -1,0 +1,96 @@
+.Capital {
+  width: 100%;
+  background: white;
+}
+
+.st0,
+.st1 {
+  stroke-linecap: round
+}
+
+.st0 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke: #4d4f51;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5;
+  fill: #e6e6e6
+}
+
+.st1 {
+  fill: none
+}
+
+.st1,
+.st2,
+.st3 {
+  stroke: #4d4f51;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5
+}
+
+.st2 {
+  fill: none
+}
+
+.st3 {
+  stroke-linecap: round
+}
+
+.st10,
+.st12,
+.st3,
+.st4,
+.st5,
+.st7,
+.st8,
+.st9 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #4d4f51
+}
+
+.st10,
+.st12,
+.st5,
+.st7,
+.st8,
+.st9 {
+  stroke: #4d4f51;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5
+}
+
+.st10,
+.st12,
+.st7,
+.st8,
+.st9 {
+  fill: #c5ebb2;
+  stroke-linecap: round
+}
+
+.st10,
+.st12,
+.st8,
+.st9 {
+  fill: #fff
+}
+
+.st10,
+.st12,
+.st9 {
+  fill: #b5e59e
+}
+
+.st10,
+.st12 {
+  fill: #ddf3d3
+}
+
+.st12 {
+  fill: #ddf3d2
+}

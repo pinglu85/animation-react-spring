@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Rent from './Rent/Rent';
+import Capital from './Capital/Capital';
+import Invest from './Invest/Invest';
+import Magnifier from './Experiment/Magnifier';
+import appStyles from './App.module.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={appStyles.App}>
+      <div className={appStyles.AnimationWrapper}>
+        <p>Rent 1</p>
+        <Rent />
+      </div>
+      <div className={appStyles.AnimationWrapper}>
+        <p>Capital 1</p>
+        <Capital />
+      </div>
+      <div className={appStyles.AnimationWrapper}>
+        <p>Invest</p>
+        <Invest />
+      </div>
+      <div className={appStyles.AnimationWrapper}>
+        <p>Test</p>
+        <Magnifier />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,28 @@
+body {
+  background-color: rgb(128, 128, 128);
+}
+
+.App {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px 10vw;
+  justify-content: space-between;
+}
+
+.AnimationWrapper {
+  width: 500px;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .App {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    margin: 12px;
+  }
+}

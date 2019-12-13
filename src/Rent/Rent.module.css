@@ -1,0 +1,42 @@
+.Rent {
+  width: 100%;
+  background: white;
+}
+
+.st0 {
+  fill: none;
+  stroke: #4e5051;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5
+}
+
+.st1,
+.st2,
+.st6,
+.st7 {
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  fill: #fde6b8
+}
+
+.st2,
+.st6,
+.st7 {
+  fill: #4e5051;
+  stroke: #4e5051;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5
+}
+
+.st6,
+.st7 {
+  fill: #fde6b8
+}
+
+.st7 {
+  fill: #ffd073
+}
