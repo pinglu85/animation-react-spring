@@ -5,7 +5,7 @@
 
 .st0,
 .st1 {
-  stroke-linecap: round
+  stroke-linecap: round;
 }
 
 .st0 {
@@ -15,11 +15,11 @@
   stroke-width: 1.5;
   stroke-linejoin: round;
   stroke-miterlimit: 1.5;
-  fill: #e6e6e6
+  fill: #e6e6e6;
 }
 
 .st1 {
-  fill: none
+  fill: none;
 }
 
 .st1,
@@ -28,15 +28,15 @@
   stroke: #4d4f51;
   stroke-width: 1.5;
   stroke-linejoin: round;
-  stroke-miterlimit: 1.5
+  stroke-miterlimit: 1.5;
 }
 
 .st2 {
-  fill: none
+  fill: none;
 }
 
 .st3 {
-  stroke-linecap: round
+  stroke-linecap: round;
 }
 
 .st10,
@@ -49,7 +49,7 @@
 .st9 {
   fill-rule: evenodd;
   clip-rule: evenodd;
-  fill: #4d4f51
+  fill: #4d4f51;
 }
 
 .st10,
@@ -61,7 +61,7 @@
   stroke: #4d4f51;
   stroke-width: 1.5;
   stroke-linejoin: round;
-  stroke-miterlimit: 1.5
+  stroke-miterlimit: 1.5;
 }
 
 .st10,
@@ -70,27 +70,27 @@
 .st8,
 .st9 {
   fill: #c5ebb2;
-  stroke-linecap: round
+  stroke-linecap: round;
 }
 
 .st10,
 .st12,
 .st8,
 .st9 {
-  fill: #fff
+  fill: #ffffff;
 }
 
 .st10,
 .st12,
 .st9 {
-  fill: #b5e59e
+  fill: #b5e59e;
 }
 
 .st10,
 .st12 {
-  fill: #ddf3d3
+  fill: #ddf3d3;
 }
 
 .st12 {
-  fill: #ddf3d2
+  fill: #ddf3d2;
 }
