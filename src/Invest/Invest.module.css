@@ -9,13 +9,13 @@
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-miterlimit: 1.5
+  stroke-miterlimit: 1.5;
 }
 
 .st1 {
   fill-rule: evenodd;
   clip-rule: evenodd;
-  fill: #4d4f51
+  fill: #4d4f51;
 }
 
 .st1,
@@ -24,7 +24,7 @@
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-miterlimit: 1.5
+  stroke-miterlimit: 1.5;
 }
 
 .st4,
@@ -33,7 +33,7 @@
 .st7 {
   fill-rule: evenodd;
   clip-rule: evenodd;
-  fill: #c2dcfc
+  fill: #c2dcfc;
 }
 
 .st6,
@@ -43,9 +43,13 @@
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-miterlimit: 1.5
+  stroke-miterlimit: 1.5;
 }
 
 .st7 {
-  fill: #fff
+  fill: #ffffff;
+}
+
+.st8 {
+  fill: #4d4f51;
 }
