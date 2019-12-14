@@ -1,68 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { animated as a, useSpring } from 'react-spring';
-import { animated, Keyframes, Spring } from 'react-spring/renderprops';
-import { interpolate } from 'flubber';
 import * as easings from 'd3-ease';
+import delay from 'delay';
 import investStyles from './Invest.module.css';
 
-// hand path interpolation
-const handPaths = [
-  'M1110.4 324.9c14.6-4.1 33.1-10.1 45.8-15.9 12.1-5.6 24.9-13.8 34.3-20.8.7-.5 2.6-1 3.4-1.4 2-.8 3.9-1.8 5.4-2.9 2.2-1.6 3.6-3.5 3.8-5.4.1-1.4.2-4.1-.5-6.4-.4-1.7-1.2-3.2-2.5-4.2-1-.7-2.4-1.1-4.3-.8-1.4.2-2.5 1-3.4 2.1-1.8 2-3 5.2-4.4 8.1-1 2-2.2 3.9-3.8 5.1-3.9 2.9-21.8 13.4-33.7 17.8-11.9 4.5-28.1 7.3-43.9 9.5l3.8 15.2z',
-  'M1110.8 323.6c11.7.3 30.5-.4 45-3.3 13.1-2.6 26-6.4 36.6-11.3.8-.4 2.7-.5 3.6-.7 2.3-.4 4.4-1.1 6.2-2 2.3-1.1 3.9-2.6 4.4-4.4.4-1.2.8-3.2.8-5.3 0-1.8-.3-3.7-1.2-5.1-.9-1.3-2.3-2.2-4.5-2.2-1.4 0-2.6.5-3.7 1.3-1.9 1.4-3.5 3.7-5.1 5.9-1.7 2.2-3.4 4.4-5.6 5.4-4.4 2-18.2 5.3-34 7.1-13.9 1.6-33.6 1.5-45.2-.7l2.7 15.3z'
-];
-const handPathsInterpolators = [];
-for (let i = 0; i < handPaths.length; i++) {
-  handPathsInterpolators.push(
-    interpolate(handPaths[i], handPaths[i + 1] || handPaths[0], {
-      maxSegmentLength: 0.1
-    })
-  );
-}
-
 const Invest = () => {
-  // magnifierAnimation
-  const magnifierAnimation = useSpring({
-    from: {
-      transform: 'rotate(0deg) translate3d(0, 0px, 0)'
+  // Magnifier and paper line animation
+  const { ry, s } = useSpring({
+    from: { ry: [0, 0], s: 1 },
+    to: async next => {
+      while (1) {
+        await next({
+          ry: [-15, 2],
+          s: 0
+        });
+        await next({ ry: [0, 0], s: 1 });
+      }
     },
-    to: [
-      { transform: 'rotate(-10deg) translate3d(0, -20px, 0)' },
-      { transform: 'rotate(0deg) translate3d(0, 0px, 0)' }
-    ],
-    config: { duration: 3000, easing: easings.easeSinInOut }
+    config: { duration: 2000, easing: easings.easeSinInOut }
   });
 
-  // Hand path interpolation
-  const [handInterpolators] = useState(handPathsInterpolators);
-  const [handIndex, setHandIndex] = useState(0);
-  const goNextHand = () => {
-    setHandIndex(handIndex + 1 >= handInterpolators.length ? 0 : handIndex + 1);
-  };
-  const handInterpolator = handInterpolators[handIndex];
+  // Hand left animation
+  const handLeftAnimation = useSpring({
+    from: { transform: 'rotate(0deg) translate3d(0px, 0, 0)' },
+    to: async next => {
+      while (1) {
+        await delay(1500);
+        await next({
+          transform: 'rotate(-25deg) translate3d(-25px, 0, 0)'
+        });
+        await next({
+          transform: 'rotate(0deg) translate3d(0px, 0, 0)'
+        });
+      }
+    },
+    config: { duration: 2800, easing: easings.easeSinInOut }
+  });
 
-  const handContent = (
-    <Spring
-      reset
-      native
-      from={{ t: 0 }}
-      to={{ t: 1 }}
-      config={{ duration: 2000, easing: easings.easeSinInOut }}
-      onRest={goNextHand}
-    >
-      {({ t }) => (
-        <animated.path
-          fill="none"
-          stroke="#4d4f51"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeMiterlimit="1.5"
-          strokeWidth="1.5"
-          d={t.interpolate(handInterpolator)}
-          clipRule="evenodd"
-        ></animated.path>
-      )}
-    </Spring>
-  );
+  // Compass needle animation
+  const { radians } = useSpring({
+    from: { radians: 0 },
+    to: async next => {
+      while (1) {
+        await next({ radians: 2 * Math.PI });
+      }
+    },
+    config: { duration: 2600 },
+    reset: true
+  });
+
+  // Calculator button animation
+  const buttonAnimation = useSpring({
+    from: { transform: 'scale(1)' },
+    to: async next => {
+      while (1) {
+        await delay(800);
+        await next({ transform: 'scale(0.85)' });
+        await next({ transform: 'scale(1)' });
+      }
+    }
+  });
 
   return (
     <div className={investStyles.Invest}>
@@ -149,7 +146,14 @@ const Invest = () => {
           r="47"
           className={investStyles.st0}
         ></circle>
-        <g id="hand-left">
+        <a.g
+          id="hand-left"
+          style={{
+            willChange: 'transform',
+            transformOrigin: '505.3px 441.25px',
+            ...handLeftAnimation
+          }}
+        >
           <path
             d="M316.5 386.5s-8.5 8.5-10.9 13.7c-2.3 4.9 2.2 12.9 4 18.1m10.3 24.6c.9 1.3 2.8 4 3.2 4.4 1.3 1.3 13.3 15.3 19 18.2 4.1 2.1 11.6-4.3 6.7-16.3"
             className={investStyles.st0}
@@ -170,8 +174,15 @@ const Invest = () => {
             d="M474.7 457.8c11.7 3 23.7 7.5 25.5 8-4.8 17-12.2 28.6-18.2 27.5-6.4-1-9.2-16.1-7.3-35.5zm25.6 7.8l-.1.2.1-.4v.2zm.1-.5c0 .1-.1.2-.1.3l.1-.3zm.1-.2v.2l.1-.3-.1.1zm.1-.6c0 .1-.1.2-.1.4l.1-.4zm.1-.2v.1l.1-.4-.1.3zm.1-.6c0 .1-.1.2-.1.4l.1-.4zm.2-.4c0 .1-.1.2-.1.4l.1-.4zm0-.3v.2l.1-.3-.1.1zm.2-.5c0 .1-.1.2-.1.4l.1-.4zm0-.2v.1l.1-.3-.1.2zm.2-.7c0 .1-.1.2-.1.4l.1-.4zm.1-.4c0 .1-.1.2-.1.4l.1-.4zm0-.3v.2l.1-.3-.1.1zm.2-.5c0 .1-.1.2-.1.4l.1-.4zm0-.2v.1l.1-.3-.1.2zm.2-.7c0 .1-.1.2-.1.4l.1-.4zm.1-.4c0 .1-.1.2-.1.4l.1-.4zm0-.3v.2l.1-.4-.1.2zm.2-.6c0 .1-.1.2-.1.4l.1-.4zm0-.2v.1l.1-.3-.1.2zm.1-.6c0 .1-.1.3-.1.4l.1-.4zm.1-.5c0 .1-.1.3-.1.4l.1-.4zm.1-.2v.2l.1-.4-.1.2zm.1-.6c0 .1-.1.3-.1.4l.1-.4zm.1-.3v.2l.1-.4-.1.2zm.1-.6c0 .1-.1.3-.1.4l.1-.4zm.1-.5c0 .1 0 .3-.1.4l.1-.4zm0-.2v.3l.1-.4-.1.1zm.2-.6c0 .1 0 .3-.1.4l.1-.4zm0-.3v.2l.1-.4-.1.2zm.1-.6c0 .1 0 .3-.1.4l.1-.4zm.2-.9c0 .1 0 .2-.1.4 0 .1 0 .3-.1.4l.1-.4.1-.4zm0-.2v-.2.2zm.1-.6c0 .1 0 .2-.1.4l.1-.4zm0-.2v.1l.1-.3-.1.2zm.1-.6c0 .1 0 .2-.1.4l.1-.4zm.1-.2v.1-.3.2zm.1-.6c0 .1 0 .2-.1.4l.1-.4zm0-.3v.1-.3.2zm.1-.6c0 .1 0 .2-.1.4l.1-.4zm0-.2v.2-.3.1zm.1-.6c0 .1 0 .2-.1.4l.1-.4zm.1-.2v.2-.3.1zm0-.6v.4-.4zm.1-.3v.2-.3.1zm0-.5v.4-.4zm.1-.3v.2-.2zm0-.3v-.3.3zm.1-.6v.4-.4zm0-.2v-.2.2zm.1-.6v.4-.4zm0-.2v.1-.3.2zm.1-.6v.3-.3zm0-.2v.1-.3.2zm.1-.6v.3-.3zm0-.2v.1-.3.2zm0-.5v.3-.3zm.1-.3v.2-.3.1zm0-.5v.3-.3zm0-.3v.2-.3.1zm.1-.5v.3-.3zm0-.3v.2-.2zm0-.5v.3-.3zm.1-.2v.2-.2zm0-.3v-.2.2zm0-.6v.3-.3zm0-.2v-.2.2zm.1-.6v.3-.3zm0-.1v.1-.3.2zm0-.6v.3-.3zm0-.2v.1-.3.2zm.1-.6v.3-.3zm0-.2v.1-.3.2zm0-.5v.3-.3zm0-.2v.2-.3.1zm0-.5v.3-.3zm0-.3v.2-.3.1zm.1-.5v.3-.3zm0-.2v.2-.2zm0-.5v.3-.3zm0-.2v.2-.2zm0-.3v-.2.2zm0-.5v.3-.3zm0-.2v-.2.2zm0-.5v.3-.3zm0-.2v.1-.3.2zm0-.5v.3-.3zm0-.2v.1-.3.2zm0-.5v.3-.3zm0-.2v.1-.3.2zm0-.5v.3-.3zm0-.2v.1-.3.2zm0-.5v.3-.3zm0-.2v.2-.2zm0-.5v.3-.3zm0-.2v.2-.2zm0-.2v-.2.2zm-.1-.5v.3-.3zm0-.2v-.2.2zm0-.5v.3-.3zm0-.2v-.2.2zm0-.4v.3-.3zm0-.2v.1-.2.1zm-.1-.5v.3-.3zm0-.2v.1-.2.1zm0-.4v.3-.3zm0-.2v.1-.2.1zm-.1-.4v.3-.3zm0-.2v.1-.1zm0-.5v.3-.3zm0-.2v.2-.2zm-.1-.4v.3-.3zm0-.2v.2-.2zm0-.2v-.2.2zm-.1-.4v.3-.3zm0-.2v-.2.2zm0-.4v.3-.3zm0-.2v-.1.1zm-.1-.4v.3-.3zm0-.1v-.1.1zm-.1-.5v.2-.2zm0-.1v.1-.2.1zm-.1-.4v.2-.2zm0-.2v.1-.1zm0-.4v.2-.2zm-.1-.1v.1-.1zm0-.4v.2-.2zm-.1-.2v.1-.1zm0-.3v.2-.2zm-.1-.2v.2-.2zm0-.2v-.2.2zm-.1-.4v.2-.2zm0-.1v-.1.1zm-.1-.4v.2-.2zm0-.1v-.1.1zm-.1-.4v.2-.2zm0-.1zm-.1-.4c0 .1 0 .1.1.2l-.1-.2zm-.1-.1zm0-.3c0 .1 0 .1.1.2l-.1-.2zm-.1-.2zm-.1-.3c0 .1 0 .1.1.2l-.1-.2zm0-.2v.1-.1zm-.1-.3c0 .1 0 .1.1.2l-.1-.2zm0-.1v.1-.1zm-.1-.3c0 .1 0 .1.1.2l-.1-.2zm-.1-.2zm0-.1zm-.1-.1zm0-.2zm-.1-.1zm0-.2zm-.1-.1zm0-.1zm-.1-.2zm0-.1zm-.1-.2zm0-.1zm-.1-.1zm0-.1zm-.1-.2zm0-.1zm-.1-.1zm-.1-.1zm0-.2zm-9.8-3.2c1.7-1.3 3.3-1.8 4.8-1.6 2 .4 3.6 2.1 4.9 4.8-2.1-.8-5.5-1.9-9.7-3.2z"
             className={investStyles.st1}
           ></path>
-        </g>
-        <g id="calculator-button">
+        </a.g>
+        <a.g
+          id="calculator-button"
+          style={{
+            willChange: 'transform',
+            transformOrigin: '1003.05px 669.05px',
+            ...buttonAnimation
+          }}
+        >
           <circle
             cx="1003"
             cy="669.1"
@@ -182,8 +193,17 @@ const Invest = () => {
             d="M979.8 674c-.3-1.6-.5-3.3-.5-5 0-13.1 10.6-23.8 23.8-23.8 13.1 0 23.8 10.6 23.8 23.8 0 13.1-10.6 23.8-23.8 23.8-4.2 0-8.1-1.1-11.5-3"
             className={investStyles.st0}
           ></path>
-        </g>
-        <g id="compass-needle">
+        </a.g>
+        <a.g
+          id="compass-needle"
+          style={{
+            willChange: 'transform',
+            transformOrigin: '741.6px 363px',
+            transform: radians.interpolate(
+              r => `rotate(${30 * Math.sin(r + (2 * Math.PI) / 5)}deg)`
+            )
+          }}
+        >
           <circle
             cx="741.6"
             cy="363"
@@ -198,7 +218,7 @@ const Invest = () => {
             d="M749.1 361.5c.6 2.9-.5 5.9-3.1 7.7-2.5 1.8-5.8 1.8-8.3.3l24.9 23.3-13.5-31.3z"
             className={investStyles.st0}
           ></path>
-        </g>
+        </a.g>
         <g>
           <path
             d="M851.9 291.8s-1.8 6.1-2.5 8.4c-.5 1.8-3.2 7.4-2.9 7.8.5.6 3.2.8 3.9 1.2 1.1.6.1 7.2 1.2 9.3 2 3.8 11.2.8 11.2.8s2.9 3.8 2.4 9.6m9.8-4.8c-.7-5.6-.2-10.4 0-11.9m-7.1-7.4c-.7 1-1.6 1.8-2.4 2.1"
@@ -324,15 +344,17 @@ const Invest = () => {
           </g>
         </g>
         <a.g
-          id="magnifier"
+          id="magnifier-hand"
           style={{
             willChange: 'transform',
-            transformOrigin: '1197.295px 320.071px',
-            ...magnifierAnimation
+            transformOrigin: '1104px 315.3px',
+            transform: ry.interpolate(
+              (r, y) => `rotate(${r}deg) translate3d(0, ${y}px, 0)`
+            )
           }}
         >
           <path
-            d="M1204.5 304.9l2.6 36-9 .4-.8-33.2c2.9-.7 5.4-1.8 7.2-3.2zm-1.2-15.3c-.5-.1-1-.2-1.5-.2-1.9 0-3.4.9-4.8 2.2l-.4-18.8h2.8c.9 0 1.9-.1 2.8-.2l1.1 17z"
+            d="M1207.1 340.9l-9 .4-1.5-68.4h2.8c.9 0 1.9-.1 2.8-.2l4.9 68.2z"
             className={investStyles.st6}
           ></path>
           <path
@@ -343,13 +365,21 @@ const Invest = () => {
             d="M1195.2 178c26.2-1.1 48.3 19.2 49.5 45.3 1.1 26.2-19.2 48.3-45.3 49.5-26.2 1.1-48.3-19.2-49.5-45.3-1.2-26.2 19.1-48.4 45.3-49.5zm.3 7.6c22-1 40.6 16.1 41.6 38.1s-16.1 40.6-38.1 41.6-40.6-16.1-41.6-38.1c-.9-22.1 16.1-40.7 38.1-41.6z"
             className={investStyles.st6}
           ></path>
+          <path
+            d="M1104 323.6s34.3-.7 51.8-3.7c13.1-2.6 26-6 36.6-10.9.8-.4 2.7-.5 3.6-.7 2.3-.4 4.4-1.1 6.2-2 2.3-1.1 3.9-2.6 4.4-4.4.4-1.2.8-3.2.8-5.3 0-1.8-.3-3.7-1.2-5.1-.9-1.3-2.3-2.2-4.5-2.2-1.4 0-2.6.5-3.7 1.3-1.9 1.4-3.5 3.7-5.1 5.9-1.7 2.2-3.4 4.4-5.6 5.4-4.4 2-18.2 5.3-34 7.1-13.9 1.6-33.6 1.5-45.2-.7l-4.1 15.3z"
+            className={investStyles.st7}
+          ></path>
         </a.g>
-        <path
-          id="paper-line"
+        <a.path
           d="M1229.1 236.3l-9.4-36.3"
           className={investStyles.st0}
-        ></path>
-        {handContent}
+          id="paper-line"
+          style={{
+            willChange: 'transform',
+            transformOrigin: '1219.70px 200px',
+            transform: s.interpolate(s => `scale(${s})`)
+          }}
+        ></a.path>
         <g>
           <path
             d="M1106.6 272.1c1.4 6.1 4.2 18.2 0 22.2-1.7 1.6-4.4.9-5.9 2.3-1.6 1.5-1.5 7.2-1.5 10m-8.8-11.7c1.5 5.9 1.4 10.2 1.4 12.4"
