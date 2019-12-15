@@ -2,7 +2,7 @@ import React from 'react';
 import Rent from './Rent/Rent';
 import Capital from './Capital/Capital';
 import Invest from './Invest/Invest';
-import Magnifier from './Experiment/Magnifier';
+import Numbers from './Invest/Numbers';
 import appStyles from './App.module.css';
 
 function App() {
@@ -19,10 +19,6 @@ function App() {
       <div className={appStyles.AnimationWrapper}>
         <p>Invest</p>
         <Invest />
-      </div>
-      <div className={appStyles.AnimationWrapper}>
-        <p>Test</p>
-        <Magnifier />
       </div>
     </div>
   );
