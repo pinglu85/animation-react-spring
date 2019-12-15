@@ -2,7 +2,6 @@ import React from 'react';
 import Rent from './Rent/Rent';
 import Capital from './Capital/Capital';
 import Invest from './Invest/Invest';
-import Numbers from './Invest/Numbers';
 import appStyles from './App.module.css';
 
 function App() {
