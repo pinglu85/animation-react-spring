@@ -3,6 +3,7 @@ import { animated as a, useSpring } from 'react-spring';
 import * as easings from 'd3-ease';
 import delay from 'delay';
 import investStyles from './Invest.module.css';
+import Numbers from './Numbers';
 
 const Invest = () => {
   // Magnifier and paper line animation
@@ -54,8 +55,8 @@ const Invest = () => {
     from: { transform: 'scale(1)' },
     to: async next => {
       while (1) {
-        await delay(800);
-        await next({ transform: 'scale(0.85)' });
+        await delay(900);
+        await next({ transform: 'scale(0.8)' });
         await next({ transform: 'scale(1)' });
       }
     }
@@ -406,6 +407,7 @@ const Invest = () => {
             className={investStyles.st4}
           ></path>
         </g>
+        <Numbers />
       </svg>
     </div>
   );
