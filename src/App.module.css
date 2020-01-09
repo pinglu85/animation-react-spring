@@ -1,17 +1,18 @@
-body {
-  background-color: rgb(128, 128, 128);
+section {
+  padding: 196px 10vw;
 }
 
-.App {
+.Section1 {
   display: flex;
   flex-wrap: wrap;
-  margin: 50px 10vw;
   justify-content: space-between;
+  background-color: rgb(128, 128, 128);
 }
 
 .AnimationWrapper {
   width: 500px;
   max-width: 100%;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 1024px) {
