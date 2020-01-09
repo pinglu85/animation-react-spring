@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
+@import url('https://rsms.me/inter/inter.css');
+
+.FeaturesWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.FeatureIcon {
+  width: 67px;
+  height: 67px;
+}
+
+.FeatureTitle {
+  font-family: 'Libre Baskerville', serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 133%;
+  color: #2E251B;
+  margin-top: 40px;
+}
+
+.FeatureDesc {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 160%;
+  color: #403C3B;
+  margin-top: 16px;
+}
