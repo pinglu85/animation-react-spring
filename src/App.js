@@ -1,4 +1,5 @@
 import React from 'react';
+import { LoremIpsum } from 'react-lorem-ipsum';
 import Rent from './Rent/Rent';
 import Capital from './Capital/Capital';
 import Invest from './Invest/Invest';
@@ -21,6 +22,9 @@ function App() {
       </section>
       <section>
         <Features />
+      </section>
+      <section>
+        <LoremIpsum p={2} />
       </section>
     </div>
   );
