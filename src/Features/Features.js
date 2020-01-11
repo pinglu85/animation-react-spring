@@ -37,12 +37,10 @@ const Features = () => {
     onIntersect: ([entry]) => {
       const currentY = entry.boundingClientRect.y;
       const isIntersect = entry.isIntersecting;
-      console.log(entry.rootBounds.y);
-
       if (isIntersect) {
         setInViewFromAbove(true);
       } else if (currentY > previousY && !isIntersect) {
-        setInViewFromAbove(false);
+        setInViewFromAbove(false); // set to false when scrolling up and not in view
       }
       previousY = currentY;
     }
