@@ -3,7 +3,7 @@ import 'intersection-observer';
 
 export default function useIntersect({ target, onIntersect }) {
   useEffect(() => {
-    const io = new window.IntersectionObserver(onIntersect);
+    const io = new IntersectionObserver(onIntersect);
     const node = target.current;
     io.POLL_INTERVAL = 100;
     io.observe(node);
