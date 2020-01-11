@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import useIntersect from './useIntersect';
 import featureStyles from './Features.module.css';
 
@@ -27,23 +27,35 @@ const Items = [
 ];
 
 const Features = () => {
-  const [ref, entry] = useIntersect();
-  const [color, setColor] = useState('grey');
+  const target = useRef(null);
+  const [inViewFromAbove, setInViewFromAbove] = useState(false);
 
-  useEffect(() => {
-    if (entry.isIntersecting) {
-      setColor('red');
+  let previousY = 0;
+
+  useIntersect({
+    target,
+    onIntersect: ([entry]) => {
+      const currentY = entry.boundingClientRect.y;
+      const isIntersect = entry.isIntersecting;
+      console.log(entry.rootBounds.y);
+
+      if (isIntersect) {
+        setInViewFromAbove(true);
+      } else if (currentY > previousY && !isIntersect) {
+        setInViewFromAbove(false);
+      }
+      previousY = currentY;
     }
-  }, [color, entry]);
+  });
 
   return (
     <div className={featureStyles.FeaturesWrapper}>
       {Items.map(item => (
         <div key={item.id}>
           <div
-            ref={ref}
+            ref={target}
             style={{
-              backgroundColor: color,
+              backgroundColor: inViewFromAbove ? 'red' : 'grey',
               transition: 'background-color 1s linear'
             }}
             className={featureStyles.FeatureIcon}
