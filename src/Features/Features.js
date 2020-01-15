@@ -30,19 +30,6 @@ const Features = () => {
     }
   ];
 
-  // console.log(inViewFromAbove);
-  // useEffect(() => {
-  //   const currentY = entry.boundingClientRect.y;
-  //   const isIntersect = entry.isIntersecting;
-  //   console.log('previousY:', previousY);
-  //   console.log(currentY);
-  //   console.log('useEffect called');
-  //   if (currentY < previousY && isIntersect) {
-  //     setInViewFromAbove(true);
-  //   }
-  //   setPreviousY(currentY);
-  // }, [entry, previousY, io]);
-
   return (
     <div className={featureStyles.FeaturesWrapper}>
       {Items.map(item => (
