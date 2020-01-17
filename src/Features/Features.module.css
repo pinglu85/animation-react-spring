@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
 @import url('https://rsms.me/inter/inter.css');
 
 .FeaturesWrapper {
@@ -12,14 +11,17 @@
   height: 67px;
 }
 
+.FeatureCopyWrapper {
+  margin-top: 40px;
+}
+
 .FeatureTitle {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 133%;
   color: #2E251B;
-  margin-top: 40px;
 }
 
 .FeatureDesc {
