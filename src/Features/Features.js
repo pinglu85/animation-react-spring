@@ -1,8 +1,9 @@
-import React from 'react';
-import { animated as a, useTrail } from 'react-spring';
+import React, { useRef } from 'react';
+import { animated as a, useSpring, useChain } from 'react-spring';
 import useIntersect from './useIntersect';
 import featureStyles from './Features.module.css';
 
+// Icons
 const keys = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 67">
     <path
@@ -58,23 +59,21 @@ const calculator = (
   </svg>
 );
 
+// Items
 const items = [
   {
-    id: 'keys',
     icon: keys,
     heading: 'Kostenloser Mietservice',
     desc:
       'Lorem ipsum dolor sit amet, consect adipiscing elit ut aliquam, purus sit amet luctus venenatis.'
   },
   {
-    id: 'flower',
     icon: flower,
     heading: 'Ideale Kapitalanlage',
     desc:
       'Lorem ipsum dolor sit amet, consect adipiscing elit ut aliquam, purus sit amet luctus venenatis.'
   },
   {
-    id: 'calculator',
     icon: calculator,
     heading: 'Investitionsmanagement',
     desc:
@@ -87,43 +86,145 @@ const Features = () => {
     triggerOnce: true
   });
 
-  // Items animation
-  const trail = useTrail(items.length, {
+  // Hard code the animation because delay between each item
+  // cannot be modified when using useTrail.
+  // Item one animations
+  const iconOneRef = useRef();
+  const iconOneSpring = useSpring({
+    ref: iconOneRef,
     opacity: inView ? 1 : 0,
-    scale: inView ? 1 : 0,
-    from: { opacity: 0, scale: 0 },
-    delay: 300,
-    config: { mass: 5, tension: 1300, friction: 200 }
+    transform: inView ? 'scale(1)' : 'scale(0)',
+    from: { opacity: 0, transform: 'scale(0)' },
+    config: { mass: 5, tension: 2000, friction: 200 }
   });
+
+  const copyOneRef = useRef();
+  const copyOneSpring = useSpring({
+    ref: copyOneRef,
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'scale(1)' : 'scale(0)',
+    from: { opacity: 0, transform: 'scale(0)' },
+    config: { mass: 5, tension: 2000, friction: 200 }
+  });
+
+  // Item two animations
+  const iconTwoRef = useRef();
+  const iconTwoSpring = useSpring({
+    ref: iconTwoRef,
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'scale(1)' : 'scale(0)',
+    from: { opacity: 0, transform: 'scale(0)' },
+    config: { mass: 5, tension: 2000, friction: 200 }
+  });
+
+  const copyTwoRef = useRef();
+  const copyTwoSpring = useSpring({
+    ref: copyTwoRef,
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'scale(1)' : 'scale(0)',
+    from: { opacity: 0, transform: 'scale(0)' },
+    config: { mass: 5, tension: 2000, friction: 200 }
+  });
+
+  // Item three animations
+  const iconThreeRef = useRef();
+  const iconThreeSpring = useSpring({
+    ref: iconThreeRef,
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'scale(1)' : 'scale(0)',
+    from: { opacity: 0, transform: 'scale(0)' },
+    config: { mass: 5, tension: 2000, friction: 200 }
+  });
+
+  const copyThreeRef = useRef();
+  const copyThreeSpring = useSpring({
+    ref: copyThreeRef,
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'scale(1)' : 'scale(0)',
+    from: { opacity: 0, transform: 'scale(0)' },
+    config: { mass: 5, tension: 2000, friction: 200 }
+  });
+
+  useChain(
+    [
+      { current: iconOneRef.current },
+      copyOneRef,
+      iconTwoRef,
+      copyTwoRef,
+      iconThreeRef,
+      copyThreeRef
+    ],
+    [0, 0.2, 0.4, 0.6, 0.8, 1]
+  );
 
   return (
     <div className={featureStyles.FeaturesWrapper}>
-      {trail.map(({ opacity, scale }, index) => (
-        <a.div style={opacity} ref={ref} key={items[index].id}>
-          <a.div
-            style={{
-              willChange: 'transform',
-              transform: scale.interpolate(s => `scale(${s})`)
-            }}
-            className={featureStyles.FeatureIcon}
-          >
-            {items[index].icon}
-          </a.div>
-          <a.div
-            style={{
-              willChange: 'transform',
-              transformOrigin: '0 50%',
-              transform: scale.interpolate(s => `scale(${s})`)
-            }}
-            className={featureStyles.FeatureCopyWrapper}
-          >
-            <h4 className={featureStyles.FeatureTitle}>
-              {items[index].heading}
-            </h4>
-            <p className={featureStyles.FeatureDesc}>{items[index].desc}</p>
-          </a.div>
+      <div ref={ref}>
+        <a.div
+          style={{
+            willChange: 'opacity, transform',
+            ...iconOneSpring
+          }}
+          className={featureStyles.FeatureIcon}
+        >
+          {items[0].icon}
         </a.div>
-      ))}
+        <a.div
+          style={{
+            willChange: 'opacity, transform',
+            transformOrigin: '0 50%',
+            ...copyOneSpring
+          }}
+          className={featureStyles.FeatureCopyWrapper}
+        >
+          <h4 className={featureStyles.FeatureTitle}>{items[0].heading}</h4>
+          <p className={featureStyles.FeatureDesc}>{items[0].desc}</p>
+        </a.div>
+      </div>
+      <div ref={ref}>
+        <a.div
+          style={{
+            willChange: 'opacity, transform',
+            ...iconTwoSpring
+          }}
+          className={featureStyles.FeatureIcon}
+        >
+          {items[1].icon}
+        </a.div>
+        <a.div
+          style={{
+            willChange: 'opacity, transform',
+            transformOrigin: '0 50%',
+            ...copyTwoSpring
+          }}
+          className={featureStyles.FeatureCopyWrapper}
+        >
+          <h4 className={featureStyles.FeatureTitle}>{items[1].heading}</h4>
+          <p className={featureStyles.FeatureDesc}>{items[1].desc}</p>
+        </a.div>
+      </div>
+      <div ref={ref}>
+        <a.div
+          style={{
+            willChange: 'opacity, transform',
+            ...iconThreeSpring
+          }}
+          className={featureStyles.FeatureIcon}
+        >
+          {items[2].icon}
+        </a.div>
+        <a.div
+          style={{
+            willChange: 'opacity, transform',
+            transformOrigin: '0 50%',
+            ...copyThreeSpring
+          }}
+          className={featureStyles.FeatureCopyWrapper}
+        >
+          <h4 className={featureStyles.FeatureTitle}>{items[2].heading}</h4>
+          <p className={featureStyles.FeatureDesc}>{items[2].desc}</p>
+        </a.div>
+      </div>
     </div>
   );
 };
