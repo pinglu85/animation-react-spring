@@ -31,3 +31,17 @@
   color: #403C3B;
   margin-top: 16px;
 }
+
+.FeaturesVerticalWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.FeatureItem {
+  width: 358px;
+}
+
+.FeatureItem:nth-child(2) {
+  margin: 52px 0;
+}
