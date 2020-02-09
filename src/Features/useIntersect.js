@@ -7,7 +7,12 @@ export default function useIntersect({
   rootMargin,
   threshold
 }) {
-  const ref = useRef(null);
+  const refs = useRef([]);
+  const addToRefs = el => {
+    if (el && !refs.current.includes(el)) {
+      refs.current.push(el);
+    }
+  };
   const [state, setState] = useState({
     inView: false,
     entry: undefined
@@ -30,10 +35,15 @@ export default function useIntersect({
       )
   );
   useEffect(() => {
-    const node = ref.current;
-    io.POLL_INTERVAL = 100;
-    io.observe(node);
-    return () => io.unobserve(node);
+    const nodes = refs.current;
+    nodes.forEach(node => {
+      io.POLL_INTERVAL = 100;
+      io.observe(node);
+    });
+    return () =>
+      nodes.forEach(node => {
+        io.unobserve(node);
+      });
   }, [io]);
-  return [ref, state.inView, state.entry];
+  return [addToRefs, state.inView, state.entry];
 }
