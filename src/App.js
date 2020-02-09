@@ -4,6 +4,7 @@ import Rent from './Rent/Rent';
 import Capital from './Capital/Capital';
 import Invest from './Invest/Invest';
 import Features from './Features/Features';
+import FeaturesVertical from './Features/FeaturesVeritcal';
 import appStyles from './App.module.css';
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
       </section>
       <section>
         <Features />
+      </section>
+      <section>
+        <FeaturesVertical />
       </section>
       <section>
         <LoremIpsum p={2} />
