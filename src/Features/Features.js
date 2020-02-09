@@ -78,67 +78,56 @@ const items = [
 ];
 
 const Features = () => {
-  const [ref, inView] = useIntersect({
+  const [addToRefs, inView] = useIntersect({
     triggerOnce: true
   });
 
   // Hard code the animation because delay between each item
   // cannot be modified when using useTrail.
   // Item one animations
-  const iconOneRef = useRef();
-  const iconOneSpring = useSpring({
-    ref: iconOneRef,
+  const animation = {
     opacity: inView ? 1 : 0,
     transform: inView ? 'scale(1)' : 'scale(0)',
     from: { opacity: 0, transform: 'scale(0)' },
     config: { mass: 5, tension: 2000, friction: 200 }
+  };
+
+  const iconOneRef = useRef();
+  const iconOneSpring = useSpring({
+    ref: iconOneRef,
+    ...animation
   });
 
   const copyOneRef = useRef();
   const copyOneSpring = useSpring({
     ref: copyOneRef,
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'scale(1)' : 'scale(0)',
-    from: { opacity: 0, transform: 'scale(0)' },
-    config: { mass: 5, tension: 2000, friction: 200 }
+    ...animation
   });
 
   // Item two animations
   const iconTwoRef = useRef();
   const iconTwoSpring = useSpring({
     ref: iconTwoRef,
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'scale(1)' : 'scale(0)',
-    from: { opacity: 0, transform: 'scale(0)' },
-    config: { mass: 5, tension: 2000, friction: 200 }
+    ...animation
   });
 
   const copyTwoRef = useRef();
   const copyTwoSpring = useSpring({
     ref: copyTwoRef,
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'scale(1)' : 'scale(0)',
-    from: { opacity: 0, transform: 'scale(0)' },
-    config: { mass: 5, tension: 2000, friction: 200 }
+    ...animation
   });
 
   // Item three animations
   const iconThreeRef = useRef();
   const iconThreeSpring = useSpring({
     ref: iconThreeRef,
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'scale(1)' : 'scale(0)',
-    from: { opacity: 0, transform: 'scale(0)' },
-    config: { mass: 5, tension: 2000, friction: 200 }
+    ...animation
   });
 
   const copyThreeRef = useRef();
   const copyThreeSpring = useSpring({
     ref: copyThreeRef,
-    opacity: inView ? 1 : 0,
-    transform: inView ? 'scale(1)' : 'scale(0)',
-    from: { opacity: 0, transform: 'scale(0)' },
-    config: { mass: 5, tension: 2000, friction: 200 }
+    ...animation
   });
 
   useChain(
@@ -154,8 +143,8 @@ const Features = () => {
   );
 
   return (
-    <div className={featureStyles.FeaturesWrapper}>
-      <div ref={ref}>
+    <div className={featureStyles.FeaturesWrapper} ref={addToRefs}>
+      <div>
         <a.div
           style={{
             willChange: 'opacity, transform',
@@ -177,7 +166,7 @@ const Features = () => {
           <p className={featureStyles.FeatureDesc}>{items[0].desc}</p>
         </a.div>
       </div>
-      <div ref={ref}>
+      <div>
         <a.div
           style={{
             willChange: 'opacity, transform',
@@ -199,7 +188,7 @@ const Features = () => {
           <p className={featureStyles.FeatureDesc}>{items[1].desc}</p>
         </a.div>
       </div>
-      <div ref={ref}>
+      <div>
         <a.div
           style={{
             willChange: 'opacity, transform',
