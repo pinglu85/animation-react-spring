@@ -1,9 +1,5 @@
 import React from 'react';
-import { animated as a, useSpring } from 'react-spring';
-import useIntersect from './useIntersect';
-import featureStyles from './Features.module.css';
 
-// Icons
 const keys = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
     <path
@@ -55,7 +51,6 @@ const calculator = (
   </svg>
 );
 
-// Items
 const items = [
   {
     id: 'keys',
@@ -80,20 +75,4 @@ const items = [
   }
 ];
 
-const FeaturesVeritcal = () => {
-  return (
-    <div className={featureStyles.FeaturesVerticalWrapper}>
-      {items.map(item => (
-        <div className={featureStyles.FeatureItem} key={item.id}>
-          <div className={featureStyles.FeatureIcon}>{item.icon}</div>
-          <div className={featureStyles.FeatureCopyWrapper}>
-            <h4 className={featureStyles.FeatureTitle}>{item.heading}</h4>
-            <p className={featureStyles.FeatureDesc}>{item.desc}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default FeaturesVeritcal;
+export default items;

@@ -4,7 +4,7 @@ import Rent from './Rent/Rent';
 import Capital from './Capital/Capital';
 import Invest from './Invest/Invest';
 import Features from './Features/Features';
-import FeaturesVertical from './Features/FeaturesVeritcal';
+import FeaturesVertical from './Features/FeaturesVertical';
 import appStyles from './App.module.css';
 
 function App() {
