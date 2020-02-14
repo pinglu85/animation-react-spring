@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useSpring, useChain } from 'react-spring';
-import items from './itemsData';
-import useIntersect from './useIntersect';
-import Item from './Item';
+import items from './Data/data';
+import useIntersect from './shared/useIntersect';
+import Item from './Item/Item';
 import featureStyles from './Features.module.css';
 
 const Features = () => {

@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { animated as a, useSpring, useChain } from 'react-spring';
-import useIntersect from './useIntersect';
-import featureStyles from './Features.module.css';
+import useIntersect from '../shared/useIntersect';
+import featureStyles from '../Features.module.css';
 
 const ItemVertical = ({ icon, heading, desc }) => {
   const [ref, inView] = useIntersect({ triggerOnce: true });

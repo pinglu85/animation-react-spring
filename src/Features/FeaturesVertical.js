@@ -1,6 +1,6 @@
 import React from 'react';
-import items from './itemsData';
-import ItemVertical from './ItemVertical';
+import items from './Data/data';
+import ItemVertical from './Item/ItemVertical';
 import featureStyles from './Features.module.css';
 
 const FeaturesVertical = () => {

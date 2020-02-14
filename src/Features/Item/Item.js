@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { animated as a } from 'react-spring';
-import featureStyles from './Features.module.css';
+import featureStyles from '../Features.module.css';
 
 const Item = ({ iconAnimation, copyAnimation, icon, heading, desc }) => {
   return (
