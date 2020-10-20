@@ -5,19 +5,19 @@ export default function useIntersect({
   triggerOnce,
   root = null,
   rootMargin,
-  threshold
+  threshold,
 }) {
   const ref = useRef(null);
   const [state, setState] = useState({
     inView: false,
-    entry: undefined
+    entry: undefined,
   });
   const [io] = useState(
     () =>
       new IntersectionObserver(
         ([entry]) => {
           setState({
-            entry: entry
+            entry: entry,
           });
           if (entry.isIntersecting) {
             setState({ inView: true });
