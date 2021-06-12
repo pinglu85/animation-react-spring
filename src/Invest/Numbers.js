@@ -14,9 +14,10 @@ const Numbers = () => {
       o22a: 0,
       x22a: 12.9,
       o22b: 0,
-      o4a: 0
+      o4a: 0,
     },
-    to: async next => {
+    to: async (next) => {
+      // eslint-disable-next-line no-constant-condition
       while (1) {
         await delay(1000);
         // Displays 2 of 20
@@ -28,7 +29,7 @@ const Numbers = () => {
           o22a: 0,
           x22a: 12.9,
           o22b: 0,
-          o4a: 0
+          o4a: 0,
         });
         // Displays 20
         await next({
@@ -39,7 +40,7 @@ const Numbers = () => {
           o22a: 0,
           x22a: 12.9,
           o22b: 0,
-          o4a: 0
+          o4a: 0,
         });
         await delay(1000);
         // Displays 2 of 22
@@ -51,7 +52,7 @@ const Numbers = () => {
           o22a: 1,
           x22a: 12.9,
           o22b: 0,
-          o4a: 0
+          o4a: 0,
         });
         // Displays 22
         await next({
@@ -62,7 +63,7 @@ const Numbers = () => {
           o22a: 1,
           x22a: 0,
           o22b: 1,
-          o4a: 0
+          o4a: 0,
         });
         await delay(1000);
         // Displays 42
@@ -74,7 +75,7 @@ const Numbers = () => {
           o22a: 0,
           x22a: 0,
           o22b: 1,
-          o4a: 1
+          o4a: 1,
         });
         await delay(1000);
         // Displays 0
@@ -86,10 +87,10 @@ const Numbers = () => {
           o22a: 0,
           x22a: 12.9,
           o22b: 0,
-          o4a: 0
+          o4a: 0,
         });
       }
-    }
+    },
   });
   return (
     <React.Fragment>
@@ -112,8 +113,8 @@ const Numbers = () => {
           style={{
             willChange: 'opacity, transform',
             transformOrigin: '991.8px 502.5px',
-            transform: x20a.interpolate(x => `translate3d(${x}px, 0, 0)`),
-            opacity: o20a
+            transform: x20a.interpolate((x) => `translate3d(${x}px, 0, 0)`),
+            opacity: o20a,
           }}
           d="M1000 507.6c0-2.4-.2-3.2-2.4-3.2h-1.1c-2.2 0-2.5.8-2.5 3.2v6.1h-1.8V507c0-3.5.8-4.5 4-4.5h1.6c3.2 0 4 1 4 4.5v1.4c0 4.4-.7 6-4.3 11.1-3 4.2-3.7 5.8-3.7 9.9v2.2h8.1v1.8h-10.1v-4.2c0-4.4.7-6 4.3-11.1 3-4.2 3.7-5.8 3.7-9.9v-.6z"
         ></a.path>
@@ -131,8 +132,8 @@ const Numbers = () => {
           style={{
             willChange: 'opacity, transform',
             transformOrigin: '991.8px 502.5px',
-            transform: x22a.interpolate(x => `translate3d(${x}px, 0, 0)`),
-            opacity: o22a
+            transform: x22a.interpolate((x) => `translate3d(${x}px, 0, 0)`),
+            opacity: o22a,
           }}
           d="M1000 507.6c0-2.4-.2-3.2-2.4-3.2h-1.1c-2.2 0-2.5.8-2.5 3.2v6.1h-1.8V507c0-3.5.8-4.5 4-4.5h1.6c3.2 0 4 1 4 4.5v1.4c0 4.4-.7 6-4.3 11.1-3 4.2-3.7 5.8-3.7 9.9v2.2h8.1v1.8h-10.1v-4.2c0-4.4.7-6 4.3-11.1 3-4.2 3.7-5.8 3.7-9.9v-.6z"
         ></a.path>

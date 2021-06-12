@@ -3,11 +3,12 @@ import { animated as a, Keyframes } from 'react-spring/renderprops';
 import * as easings from 'd3-ease';
 import capitalStyles from './Capital.module.css';
 
-const Container = Keyframes.Spring(async next => {
+const Container = Keyframes.Spring(async (next) => {
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     await next({
       from: { radians: 0, dashOffset: 100 },
-      to: { radians: 2 * Math.PI, dashOffset: 0 }
+      to: { radians: 2 * Math.PI, dashOffset: 0 },
     });
   }
 });
@@ -254,8 +255,9 @@ const Capital = () => {
                   willChange: 'transform',
                   transformOrigin: '1030.8px 607.8px',
                   transform: radians.interpolate(
-                    r => `rotate(${6 * Math.sin(r + (1 * 2 * Math.PI) / 5)}deg)`
-                  )
+                    (r) =>
+                      `rotate(${6 * Math.sin(r + (1 * 2 * Math.PI) / 5)}deg)`
+                  ),
                 }}
                 d="M1030.8 605s32.8-44.5 84.9-68.8c28.1-13.2 63.3-24.2 97.5-10.3.3.1-13.5 36.5-62.8 59.6-71 33.2-119.6 19.5-119.6 19.5z"
                 className={capitalStyles.st10}
@@ -266,9 +268,9 @@ const Capital = () => {
                   willChange: 'transform',
                   transformOrigin: '782.6px 734.2px',
                   transform: radians.interpolate(
-                    r =>
+                    (r) =>
                       `rotate(${7 * Math.sin(r + (2.5 * 2 * Math.PI) / 5)}deg)`
-                  )
+                  ),
                 }}
                 d="M753.1 628.3s-6.2 13.7.5 44.5c7.2 32.8 29 61.3 29 61.3 2-1.8 11.9-38.2 1.3-67-10.3-27.6-30.8-38.8-30.8-38.8z"
                 className={capitalStyles.st7}
@@ -279,8 +281,9 @@ const Capital = () => {
                   willChange: 'transform',
                   transformOrigin: '720.6px 914.5px',
                   transform: radians.interpolate(
-                    r => `rotate(${6 * Math.sin(r + (3 * 2 * Math.PI) / 5)}deg)`
-                  )
+                    (r) =>
+                      `rotate(${6 * Math.sin(r + (3 * 2 * Math.PI) / 5)}deg)`
+                  ),
                 }}
                 d="M720.6 914.5s25-40.7 57.6-58.9c36.7-20.5 60.4-13.1 60.4-13.1s-10.4 28.4-34.5 45.9c-40.1 29-83.5 26.1-83.5 26.1z"
                 className={capitalStyles.st12}
@@ -291,11 +294,12 @@ const Capital = () => {
                   willChange: 'transform',
                   transformOrigin: '700.4px 316.7px',
                   transform: radians.interpolate(
-                    r =>
+                    (r) =>
                       `rotate(${12 * Math.sin(r + (1.5 * 2 * Math.PI) / 5)}deg) 
-                      translate3d(${5 *
-                        Math.sin(r + (2 * Math.PI) / 5)}px, 0, 0)`
-                  )
+                      translate3d(${
+                        5 * Math.sin(r + (2 * Math.PI) / 5)
+                      }px, 0, 0)`
+                  ),
                 }}
                 id="leaf4"
               >

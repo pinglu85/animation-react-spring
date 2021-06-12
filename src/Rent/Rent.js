@@ -6,13 +6,14 @@ import rentStyles from './Rent.module.css';
 const Rent = () => {
   const { rFront, rBack } = useSpring({
     from: { rFront: 0, rBack: 0 },
-    to: async next => {
+    to: async (next) => {
+      // eslint-disable-next-line no-constant-condition
       while (1) {
         await next({ rFront: 20, rBack: 15 });
         await next({ rFront: 0, rBack: 0 });
       }
     },
-    config: { duration: 900, easing: easings.easeSinInOut }
+    config: { duration: 900, easing: easings.easeSinInOut },
   });
 
   return (
@@ -177,7 +178,7 @@ const Rent = () => {
           style={{
             willChange: 'transform',
             transformOrigin: '616.305px 525.94px',
-            transform: rBack.interpolate(r => `rotate(${r}deg)`)
+            transform: rBack.interpolate((r) => `rotate(${r}deg)`),
           }}
         >
           <path
@@ -199,7 +200,7 @@ const Rent = () => {
           style={{
             willChange: 'transform',
             transformOrigin: '637.2px 504.2px',
-            transform: rFront.interpolate(r => `rotate(${r}deg)`)
+            transform: rFront.interpolate((r) => `rotate(${r}deg)`),
           }}
         >
           <path

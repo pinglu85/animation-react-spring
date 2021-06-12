@@ -9,57 +9,61 @@ const Invest = () => {
   // Magnifier and paper line animation
   const { ry, s } = useSpring({
     from: { ry: [0, 0], s: 1 },
-    to: async next => {
+    to: async (next) => {
+      // eslint-disable-next-line no-constant-condition
       while (1) {
         await next({
           ry: [-15, 2],
-          s: 0
+          s: 0,
         });
         await next({ ry: [0, 0], s: 1 });
       }
     },
-    config: { duration: 2000, easing: easings.easeSinInOut }
+    config: { duration: 2000, easing: easings.easeSinInOut },
   });
 
   // Hand left animation
   const handLeftAnimation = useSpring({
     from: { transform: 'rotate(0deg) translate3d(0px, 0, 0)' },
-    to: async next => {
+    to: async (next) => {
+      // eslint-disable-next-line no-constant-condition
       while (1) {
         await delay(1500);
         await next({
-          transform: 'rotate(-25deg) translate3d(-25px, 0, 0)'
+          transform: 'rotate(-25deg) translate3d(-25px, 0, 0)',
         });
         await next({
-          transform: 'rotate(0deg) translate3d(0px, 0, 0)'
+          transform: 'rotate(0deg) translate3d(0px, 0, 0)',
         });
       }
     },
-    config: { duration: 2800, easing: easings.easeSinInOut }
+    config: { duration: 2800, easing: easings.easeSinInOut },
   });
 
   // Compass needle animation
   const { radians } = useSpring({
     from: { radians: 0 },
-    to: async next => {
+    to: async (next) => {
+      // eslint-disable-next-line no-constant-condition
       while (1) {
         await next({ radians: 2 * Math.PI });
       }
     },
     config: { duration: 2600 },
-    reset: true
+    reset: true,
   });
 
   // Calculator button animation
   const buttonAnimation = useSpring({
     from: { transform: 'scale(1)' },
-    to: async next => {
+    to: async (next) => {
+      // eslint-disable-next-line no-constant-condition
       while (1) {
         await delay(900);
         await next({ transform: 'scale(0.8)' });
         await next({ transform: 'scale(1)' });
       }
-    }
+    },
   });
 
   return (
@@ -152,7 +156,7 @@ const Invest = () => {
           style={{
             willChange: 'transform',
             transformOrigin: '505.3px 441.25px',
-            ...handLeftAnimation
+            ...handLeftAnimation,
           }}
         >
           <path
@@ -181,7 +185,7 @@ const Invest = () => {
           style={{
             willChange: 'transform',
             transformOrigin: '1003.05px 669.05px',
-            ...buttonAnimation
+            ...buttonAnimation,
           }}
         >
           <circle
@@ -201,8 +205,8 @@ const Invest = () => {
             willChange: 'transform',
             transformOrigin: '741.6px 363px',
             transform: radians.interpolate(
-              r => `rotate(${30 * Math.sin(r + (2 * Math.PI) / 5)}deg)`
-            )
+              (r) => `rotate(${30 * Math.sin(r + (2 * Math.PI) / 5)}deg)`
+            ),
           }}
         >
           <circle
@@ -351,7 +355,7 @@ const Invest = () => {
             transformOrigin: '1104px 315.3px',
             transform: ry.interpolate(
               (r, y) => `rotate(${r}deg) translate3d(0, ${y}px, 0)`
-            )
+            ),
           }}
         >
           <path
@@ -378,7 +382,7 @@ const Invest = () => {
           style={{
             willChange: 'transform',
             transformOrigin: '1219.70px 200px',
-            transform: s.interpolate(s => `scale(${s})`)
+            transform: s.interpolate((s) => `scale(${s})`),
           }}
         ></a.path>
         <g>
